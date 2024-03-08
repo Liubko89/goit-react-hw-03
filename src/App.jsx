@@ -1,5 +1,9 @@
 import { useState } from "react";
 import ContactList from "./components/ContactList/ContactList";
+import SearchBox from "./components/SearchBox/SearchBox";
+import "./App.css";
+import ContactForm from "./components/ContactForm/ContactForm";
+import { nanoid } from "nanoid";
 
 function App() {
   const initialList = [
@@ -10,13 +14,23 @@ function App() {
   ];
 
   const [contactList, setcontactList] = useState(initialList);
+  const [filter, setFilter] = useState("");
+
+  const visibleContacts = contactList.filter((contact) =>
+    contact.name.toLowerCase().includes(filter.toLowerCase())
+  );
+
+  const onAddContact = (newContact) => {
+    const newFullContact = { id: nanoid(), ...newContact };
+    return setcontactList((prevContacts) => [...prevContacts, newFullContact]);
+  };
 
   return (
-    <div>
+    <div className="container">
       <h1>Phonebook</h1>
-      {/* <ContactForm /> */}
-      {/* <SearchBox /> */}
-      <ContactList contacts={contactList} />
+      <ContactForm handleAddContact={onAddContact} />
+      <SearchBox value={filter} onSearch={setFilter} />
+      <ContactList contacts={visibleContacts} />
     </div>
   );
 }
