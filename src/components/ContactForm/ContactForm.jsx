@@ -4,11 +4,16 @@ import * as Yup from "yup";
 
 const ContactsSchema = Yup.object().shape({
   name: Yup.string()
-    .min(2, "User name must be at least 2 characters!")
-    .max(50, "User name must be less than 50 characters!")
+    .min(3, "Contact name must be at least 3 characters!")
+    .max(50, "Contact name must be less than 50 characters!")
     .required("Contact name is required!"),
   number: Yup.string()
-    .number("Must be a valid number! For example: '000-00-00'")
+    .min(3, "Contact number must be at least 3 characters!")
+    .max(50, "Contact number must be less than 50 characters!")
+    .matches(
+      /^[0-9-]+$/,
+      "You are allowed to type only numbers and symbol - between numbers"
+    )
     .required("Number is required!"),
 });
 

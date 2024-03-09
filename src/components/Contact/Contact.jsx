@@ -2,7 +2,7 @@ import { FaPhone } from "react-icons/fa6";
 import { IoIosContact } from "react-icons/io";
 import css from "./Contact.module.css";
 
-const Contact = ({ contactName, contactNumber }) => {
+const Contact = ({ contactName, contactNumber, contactId, handleDelete }) => {
   return (
     <>
       <div className={css.contactWrapper}>
@@ -15,7 +15,9 @@ const Contact = ({ contactName, contactNumber }) => {
           <span>{contactNumber}</span>
         </div>
       </div>
-      <button className={css.deleteBtn}>Delete</button>
+      <button className={css.deleteBtn} onClick={() => handleDelete(contactId)}>
+        Delete
+      </button>
     </>
   );
 };

@@ -43,3 +43,9 @@
 .formBtn:hover {
   background-color: gray;
 }
+
+.errorMsg {
+  background-color: rgb(242, 242, 102);
+  border-radius: 4px;
+  padding: 4px;
+}

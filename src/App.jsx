@@ -13,7 +13,7 @@ function App() {
     { id: "id-4", name: "Annie Copeland", number: "227-91-26" },
   ];
 
-  const [contactList, setcontactList] = useState(initialList);
+  const [contactList, setContactList] = useState(initialList);
   const [filter, setFilter] = useState("");
 
   const visibleContacts = contactList.filter((contact) =>
@@ -22,7 +22,13 @@ function App() {
 
   const onAddContact = (newContact) => {
     const newFullContact = { id: nanoid(), ...newContact };
-    return setcontactList((prevContacts) => [...prevContacts, newFullContact]);
+    return setContactList((prevContacts) => [...prevContacts, newFullContact]);
+  };
+
+  const onDeleteContact = (contactId) => {
+    return setContactList((prevContacts) => {
+      return prevContacts.filter((contact) => contact["id"] !== contactId);
+    });
   };
 
   return (
@@ -30,7 +36,7 @@ function App() {
       <h1>Phonebook</h1>
       <ContactForm handleAddContact={onAddContact} />
       <SearchBox value={filter} onSearch={setFilter} />
-      <ContactList contacts={visibleContacts} />
+      <ContactList contacts={visibleContacts} handleDelete={onDeleteContact} />
     </div>
   );
 }
