@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import ContactList from "./components/ContactList/ContactList";
 import SearchBox from "./components/SearchBox/SearchBox";
 import "./App.css";
@@ -13,8 +13,15 @@ function App() {
     { id: "id-4", name: "Annie Copeland", number: "227-91-26" },
   ];
 
-  const [contactList, setContactList] = useState(initialList);
+  const [contactList, setContactList] = useState(() => {
+    const savedContacts = JSON.parse(localStorage.getItem("contacts"));
+    return savedContacts !== null ? savedContacts : initialList;
+  });
   const [filter, setFilter] = useState("");
+
+  useEffect(() => {
+    localStorage.setItem("contacts", JSON.stringify(contactList));
+  }, [contactList]);
 
   const visibleContacts = contactList.filter((contact) =>
     contact.name.toLowerCase().includes(filter.toLowerCase())

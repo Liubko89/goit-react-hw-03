@@ -14,7 +14,7 @@ const ContactsSchema = Yup.object().shape({
       /^[0-9-]+$/,
       "You are allowed to type only numbers and symbol - between numbers"
     )
-    .required("Number is required!"),
+    .required("Contact number is required!"),
 });
 
 const INITIAL_FORM_DATA = {
@@ -37,12 +37,22 @@ const ContactForm = ({ handleAddContact }) => {
       <Form className={css.form}>
         <label className={css.formLabel}>
           <span>Name</span>
-          <Field className={css.formInput} type="text" name="name" />
+          <Field
+            className={css.formInput}
+            type="text"
+            name="name"
+            placeholder="Enter contact name"
+          />
           <ErrorMessage className={css.errorMsg} name="name" component="span" />
         </label>
         <label className={css.formLabel}>
           <span>Number</span>
-          <Field className={css.formInput} type="text" name="number" />
+          <Field
+            className={css.formInput}
+            type="text"
+            name="number"
+            placeholder="Enter contact number"
+          />
           <ErrorMessage
             className={css.errorMsg}
             name="number"
